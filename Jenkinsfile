@@ -19,10 +19,13 @@ pipeline {
             }
         }
         stage('Deploy to Kubernetes') {
-            steps {
-                sh 'kubectl apply -f jc13-deployment.yaml'
-            }
+    steps {
+        withEnv(["PATH+EXTRA=/usr/local/bin"]) {
+            sh 'kubectl apply -f jc13-deployment.yaml'
         }
+    }
+}
+
     }
 }
 
